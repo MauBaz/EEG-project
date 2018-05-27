@@ -38,7 +38,7 @@ def getdata():
        
         current_event[1+ i*hertz:1+ i*hertz + min(len(signals), hertz)] = signals[:hertz] 
         
-        
+        i +=1 
         if i == channels: # we assume all channels from an event are in sequence
             current_event[-1] = int(code)
             current_event[0] = min(len(signals), hertz)
