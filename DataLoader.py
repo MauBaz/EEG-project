@@ -28,8 +28,6 @@ def getdata():
     entire_dataset = []
     current_event = np.zeros(hertz * channels + 2)
     i = 0
-    maxs = [-100000000 for z in range(channels)]
-    mins = [100000000 for j in range(channels)]
     print ('Going through data, please be patient perhaps go make some tea it will take 5-10 mins to load up')
     for l in data:
         id, event, device, channel, code, size, data = l.split('\t')
@@ -37,8 +35,8 @@ def getdata():
         signals = np.array([int(val) for val in data.split(',')])
        
         current_event[1+ i*hertz:1+ i*hertz + min(len(signals), hertz)] = signals[:hertz] 
+        i +=1
         
-        i +=1 
         if i == channels: # we assume all channels from an event are in sequence
             current_event[-1] = int(code)
             current_event[0] = min(len(signals), hertz)
